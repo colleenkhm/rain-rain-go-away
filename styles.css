@@ -1,31 +1,70 @@
 .grid {
-    width: 300px;
-    height: 300px;
-    border: solid black 1px;
-    display: flex;
-    flex-wrap: wrap;
+  width: 300px;
+  height: 300px;
+  border: solid black 1px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .grid div {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .raindrop {
-    background-color: cornflowerblue;
-    border-radius: 10px;
+  background-color: transparent;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.raindrop::after {
+  content: "";
+  position: absolute;
+  top: 25%; /* Center the shape in the div */
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 0 50% 50% 50%;
+  /* border: 1px solid black; */
+  transform: translate(-50%, -50%) rotate(45deg); /* Adjust the position and rotate */
+  /* margin-top: -25px; Half of the height to move it up */
+  background-color: cornflowerblue; /* Set the background color for the raindrop */
+  z-index: 1;
 }
 
 .sun {
-    background-color: rgb(255, 255, 0);
-    border-radius: 10px;
+  background-color: rgb(255, 255, 0);
+  border-radius: 10px;
 }
 
-
 .ray {
-    background-color: orange;
+  position: relative;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}
+
+.ray::after {
+  content: "";
+  position: absolute;
+  top: 10%; /* Adjust to center the raindrop shape within the square */
+  left: 50%; /* Adjust to center the raindrop shape within the square */
+  width: 10%; /* Half the width of the .raindrop for a smaller raindrop shape */
+  height: 80%; /* Half the height of the .raindrop for a smaller raindrop shape */
+  /* border-radius: 0 50% 50% 50%; */
+  z-index: 1;
+  background-color: yellow;
+  transform: translateX(-50%);
 }
 
 .boom {
-    background-color: red;
+  background-color: gray;
 }
+
+/* width: 50px;
+  height: 50px;
+  border-radius: 0 50% 50% 50%;
+  border: 3px solid black;
+  transform: rotate(45deg);
+  margin-top: 20px; */
