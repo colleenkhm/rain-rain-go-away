@@ -1,8 +1,10 @@
 const grid = document.querySelector('.grid')
+const resultsDisplay = document.querySelector('.results')
 let currentSunIndex = 202
 let width = 15
 let direction = 1
-let invadersId
+let raindropsId
+let goingRight = true
 
 for (let i = 0; i < 225; i++) {
     const square = document.createElement('div')
@@ -52,12 +54,39 @@ function moveRaindrops() {
     const rightEdge = raindrops[raindrops.length -1] % width === width -1
     remove()
 
+    if (rightEdge && goingRight) {
+        for (let i = 0; i < raindrops.length; i++) {
+            raindrops[i] += width +1
+            direction = -1
+            goingRight = false
+        }
+    }
+    if (leftEdge && !goingRight) {
+        for (let i = 0; i < raindrops.length; i++) {
+            raindrops[i] += width -1
+            direction = 1
+            goingRight = true
+        }
+    }
+
     for (let i = 0; i < raindrops.length; i++) {
         raindrops[i] += direction
     }
 
     draw()
 
+    if (squares[currentSunIndex].classList.contains('raindrop', 'sun')) {
+        resultsDisplay.innerHTML = 'GAME OVER'
+        clearInterval(raindropsId)
+    }
+
+    for (let i = 0; i < raindrops.length; i++) {
+        if(raindrops[i] > squares.length + width) {
+            resultsDisplay.innerHTML = 'GAME OVER'
+            clearInterval(raindropsId)
+        }
+    }
+
 }
 
-invadersId = setInterval(moveRaindrops, 500)
+raindropsId = setInterval(moveRaindrops, 100)
